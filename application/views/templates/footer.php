@@ -1,7 +1,7 @@
 <div class="row fixed-bottom">
     <div class="col-md-1" style="background-color: #EEEEEE;padding:10px;">
         <div style="margin-top : 5px;font-size: 28px; font-family: Franklin Gothic;color: black;">
-            <center><b><?php echo date("H:i") ?></b></center>
+            <center><span id='ct'> </span></center>
         </div>
     </div>
     <div class="col-md-10" style="background-color: #FF5000; padding:10px;">
@@ -34,6 +34,19 @@
 <!-- Custom js -->
 <script src="<?php echo base_url() ?>assets/js/main.js"></script>
 <script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
+<script>
+    function display_ct() {
+        var x = new Date()
+        var x1 = x.getHours() + ":" + x.getMinutes();
+        document.getElementById('ct').innerHTML = x1;
+        display_c();
+    }
+
+    function display_c() {
+        var refresh = 1000; // Refresh rate in milli seconds
+        mytime = setTimeout('display_ct()', refresh)
+    }
+</script>
 <script>
     var i = 1;
     var slide = [];
@@ -108,7 +121,7 @@
             defaultView: 'agendaWeek',
             slotDuration: '00:20:00',
             slotLabelFormat: 'H:mm',
-            scrollTime: scrollTime,
+            // scrollTime: scrollTime,
             allDaySlot: false,
             header: {
                 left: '',

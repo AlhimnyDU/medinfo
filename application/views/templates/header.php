@@ -68,7 +68,7 @@
     </style>
 </head>
 
-<body>
+<body onload=display_ct();>
     <div class="loader">
         <div class="loader-outter"></div>
         <div class="loader-inner"></div>
