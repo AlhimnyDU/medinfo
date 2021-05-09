@@ -64,7 +64,7 @@ class Media extends CI_Controller
 
     public function loadEvent()
     {
-        $url = "http://sikk.itenas.ac.id/jadwal ";
+        $url = "http://sikk.itenas.ac.id/jadwal";
         $get_url = file_get_contents($url);
         $data = json_decode($get_url);
         echo json_encode($data);
