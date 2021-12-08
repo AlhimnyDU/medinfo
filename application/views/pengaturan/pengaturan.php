@@ -172,7 +172,7 @@
                         <div class="col col-lg-12">
                             <div class="form-group">
                                 <label>Nama Slide</label>
-                                <input type="text" name="nama_slide" class="form-control">
+                                <input type="text" name="nama_slide" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Upload File</label>
