@@ -82,7 +82,7 @@ class Media extends CI_Controller
         $data = array(
             'nama_slide' => $this->input->post('nama_slide'),
             'nama_file' => $this->upload->data('file_name'),
-            'jenis' => $jenis,
+            'jenis' => "mp4",
             'created' => date('Y-m-d H:i:s'),
             'updated' => date('Y-m-d H:i:s')
         );

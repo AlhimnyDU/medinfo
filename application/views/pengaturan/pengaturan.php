@@ -313,7 +313,12 @@ foreach ($running_text as $row) { ?>
             success: function(data) {
                 Swal.fire({
                     title: 'Data Berhasil Disimpan',
-                    icon: 'success'
+                    icon: 'success',
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                    showCloseButton: false,
+                    allowEscapeKey: false,
+                    allowOutsideClick: false
                 })
             },
             error: function(data) {
