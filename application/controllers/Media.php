@@ -72,8 +72,8 @@ class Media extends CI_Controller
 
     public function addSlide()
     {
-        $this->upload_slide();
-        $extension = pathinfo("./assets/slide/" . $this->upload->data('file_name'), PATHINFO_EXTENSION);
+        $namafile = $this->upload_slide();
+        $extension = pathinfo("./assets/slide/" . $namafile, PATHINFO_EXTENSION);
         if ($extension == "mp4") {
             $jenis = "video";
         } elseif (($extension == "jpg") || $extension == "png") {
@@ -81,12 +81,17 @@ class Media extends CI_Controller
         }
         $data = array(
             'nama_slide' => $this->input->post('nama_slide'),
-            'nama_file' => $this->upload->data('file_name'),
+            'nama_file' => $namafile,
             'jenis' => $jenis,
             'created' => date('Y-m-d H:i:s'),
             'updated' => date('Y-m-d H:i:s')
         );
         $insert = $this->db->insert('slide', $data);
+        if ($insert) {
+            return true;
+        } else {
+            return false;
+        }
         redirect($_SERVER['HTTP_REFERER']);
     }
 
@@ -148,7 +153,6 @@ class Media extends CI_Controller
     public function upload_slide()
     {
         $filename = str_replace(" ", "_", $this->input->post('nama_slide'));
-        echo $filename;
         $config['upload_path']          = './assets/slide/';
         $config['allowed_types']        = 'png|jpg|mp4';
         $config['file_name']          = $filename;
@@ -156,7 +160,8 @@ class Media extends CI_Controller
         if (!$this->upload->do_upload('file')) {
             $this->session->set_flashdata('errorUpload', True);
             echo "gagal";
-            redirect($_SERVER['HTTP_REFERER']);
+        } else {
+            return $this->upload->data('file_name');
         }
     }
 

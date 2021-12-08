@@ -167,7 +167,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="<?php echo site_url('media/addSlide') ?>" enctype="multipart/form-data">
+                <form id="formSlide" method="post" action="<?php echo site_url('media/addSlide') ?>" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col col-lg-12">
                             <div class="form-group">
@@ -179,7 +179,7 @@
                                 <input type="file" class="dropify" data-allowed-file-extensions="png jpg mp4" name="file" />
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary pull-right" value="Tambah" name="submit">Submit</button>
+                                <button id="btnSubmit" type="submit" class="btn btn-primary pull-right" value="Tambah" name="submit">Submit</button>
                                 <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
                             </div>
                         </div>
@@ -291,3 +291,37 @@ foreach ($running_text as $row) { ?>
     $i++;
 }
 ?>
+<script>
+    $('#btnSubmit').click(function() {
+        // Get userid from checked checkboxes
+        Swal.fire({
+            imageUrl: "<?= base_url() ?>assets/img/loader.gif",
+            imageHeight: 30,
+            title: "Checking...",
+            text: "Please wait",
+            showConfirmButton: false,
+            showCancelButton: false,
+            showCloseButton: false,
+            allowEscapeKey: false,
+            allowOutsideClick: false
+        });
+        // AJAX request
+        $.ajax({
+            url: '<?= base_url() ?>media/pengaturan/addSlide',
+            type: 'post',
+            data: $("#formSlide").serialize() + '&form_name=' + $("#formSlide").attr("name"),
+            success: function(data) {
+                Swal.fire({
+                    title: 'Data Berhasil Disimpan',
+                    icon: 'success'
+                })
+            },
+            error: function(data) {
+                Swal.fire({
+                    title: 'Data Gagal Disimpan',
+                    icon: 'Error'
+                })
+            }
+        });
+    });
+</script>
