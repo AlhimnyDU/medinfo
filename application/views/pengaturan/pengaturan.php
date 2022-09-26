@@ -178,6 +178,14 @@
                                 <label>Upload File</label>
                                 <input type="file" class="dropify" data-allowed-file-extensions="png jpg mp4" name="file" />
                             </div>
+                            <div class="form-group">
+                                <label>Jenis</label>
+                                <select class="form-control" name="jenis">
+                                    <option value="" selected disabled hidden>Pilih...</option>
+                                    <option value="image">Image</option>
+                                    <option value="video">Video</option>
+                                </select>
+                            </div>
                             <div class="modal-footer">
                                 <button id="btnSubmit" type="submit" class="btn btn-primary pull-right" value="Tambah" name="submit">Submit</button>
                                 <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>

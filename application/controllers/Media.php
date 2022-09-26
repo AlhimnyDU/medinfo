@@ -72,26 +72,26 @@ class Media extends CI_Controller
 
     public function addSlide()
     {
-        $extension = pathinfo("./assets/slide/" . $this->upload->data('file_name'), PATHINFO_EXTENSION);
-        if ($extension == "mp4") {
-            $jenis = "video";
-        } elseif (($extension == "jpg") || $extension == "png") {
-            $jenis = "image";
-        }
+        // $extension = pathinfo("./assets/slide/" . $this->upload->data('file_name'), PATHINFO_EXTENSION);
+        // if ($extension == "mp4") {
+        //     $jenis = "video";
+        // } elseif (($extension == "jpg") || $extension == "png") {
+        //     $jenis = "image";
+        // }
         $data = array(
             'nama_slide' => $this->input->post('nama_slide'),
-            'nama_file' =>         $this->upload_slide(),
-            'jenis' => "mp4",
+            'nama_file' => $this->upload_slide(),
+            'jenis' => $this->input->post('jenis'),
             'created' => date('Y-m-d H:i:s'),
             'updated' => date('Y-m-d H:i:s')
         );
-        $insert = $this->db->insert('slide', $data);
-        if ($insert) {
-            return true;
-        } else {
-            return false;
-        }
-        redirect($_SERVER['HTTP_REFERER']);
+        $this->db->insert('slide', $data);
+        // if ($insert) {
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+        redirect('media/pengaturan');
     }
 
     public function addBerita()
@@ -104,22 +104,22 @@ class Media extends CI_Controller
             'created' => date('Y-m-d H:i:s'),
             'updated' => date('Y-m-d H:i:s')
         );
-        $insert = $this->db->insert('berita', $data);
-        redirect($_SERVER['HTTP_REFERER']);
+        $this->db->insert('berita', $data);
+        redirect('media/pengaturan');
     }
 
     public function deleteSlide($id, $file)
     {
         unlink('assets/slide/' . $file);
-        $delete = $this->db->where("id_slide", $id)->delete('slide');
-        redirect($_SERVER['HTTP_REFERER']);
+        $this->db->where("id_slide", $id)->delete('slide');
+        redirect('media/pengaturan');
     }
 
     public function deleteBerita($id, $file)
     {
         unlink('assets/berita/' . $file);
-        $delete = $this->db->where("id_berita", $id)->delete('berita');
-        redirect($_SERVER['HTTP_REFERER']);
+        $this->db->where("id_berita", $id)->delete('berita');
+        redirect('media/pengaturan');
     }
 
     public function addRunning()
@@ -129,8 +129,8 @@ class Media extends CI_Controller
             'created' => date('Y-m-d H:i:s'),
             'updated' => date('Y-m-d H:i:s')
         );
-        $insert = $this->db->insert('running_text', $data);
-        redirect($_SERVER['HTTP_REFERER']);
+        $this->db->insert('running_text', $data);
+        redirect('media/pengaturan');
     }
 
     public function updateRunning($id)
@@ -139,14 +139,14 @@ class Media extends CI_Controller
             'desk_text' => $this->input->post('desk_text'),
             'updated' => date('Y-m-d H:i:s')
         );
-        $update = $this->db->where("id_text", $id)->update('running_text', $data);
-        redirect($_SERVER['HTTP_REFERER']);
+        $this->db->where("id_text", $id)->update('running_text', $data);
+        redirect('media/pengaturan');
     }
 
     public function deleteRunning($id)
     {
-        $delete = $this->db->where("id_text", $id)->delete('running_text');
-        redirect($_SERVER['HTTP_REFERER']);
+        $this->db->where("id_text", $id)->delete('running_text');
+        redirect('media/pengaturan');
     }
 
     public function upload_slide()
@@ -175,7 +175,7 @@ class Media extends CI_Controller
         if (!$this->upload->do_upload('file')) {
             $this->session->set_flashdata('errorUpload', True);
             echo "gagal";
-            redirect($_SERVER['HTTP_REFERER']);
+            redirect('media/pengaturan');
         }
     }
 }

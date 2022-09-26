@@ -23,8 +23,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'https://bka.itenas.ac.id/tv/';
-// $config['base_url'] = 'http://localhost:8080/medinfo/';
+// $config['base_url'] = 'https://bka.itenas.ac.id/tv/';
+$config['base_url'] = 'http://localhost:8080/medinfo/';
 date_default_timezone_set('Asia/Jakarta');
 
 /*
